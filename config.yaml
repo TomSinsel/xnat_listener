@@ -1,0 +1,16 @@
+xnat_listener:
+  host: "rabbitmq"
+  localhost: "localhost"
+  port: "5672"
+  username: "guest"
+  password: "guest"
+  send_queue: "radiomics"
+
+radiomics:
+  host: "rabbitmq"
+  localhost: "localhost"
+  port: "5672"
+  username: "guest"
+  password: "guest"
+  queue_name: "radiomics"
+  send_queue: "xnat"
