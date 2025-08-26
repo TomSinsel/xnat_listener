@@ -104,7 +104,7 @@ class XNATlistener:
             file_uri = file_entry.get("URI")
 
             # Build download URL
-            download_url = urljoin("http://localhost", file_uri)
+            download_url = urljoin("http://digione-infrastructure-xnat-nginx-1:80", file_uri)
             local_path = os.path.join(output_dir, file_name)
 
             with requests.get(download_url, auth=HTTPBasicAuth(self.username, self.password), stream=True) as r:
