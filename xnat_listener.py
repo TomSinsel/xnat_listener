@@ -14,7 +14,7 @@ logger = logging.getLogger()
 
 class XNATlistener:
     
-    def __init__(self, username="admin", password="admin", base_url="http://localhost/data/projects"):
+    def __init__(self, username="admin", password="admin", base_url="http://digione-infrastructure-xnat-nginx-1:80/data/projects"):
         self.username = username
         self.password = password
         self.base_url = base_url
