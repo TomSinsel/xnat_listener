@@ -27,8 +27,9 @@ class Runner:
             if id not in self.processed_ids:
                 logging.info(f"Found new data with id: {id}")
                 self.processed_ids.append(id)
-            else:
-                logging.info("Could not find new data")
+        
+        if not downloaded_ids:
+            logging.info("Could not find new data")
                 
         return downloaded_ids
     

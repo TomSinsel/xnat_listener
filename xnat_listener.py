@@ -14,10 +14,11 @@ logger = logging.getLogger()
 
 class XNATlistener:
     
-    def __init__(self, username="admin", password="admin", base_url="http://digione-infrastructure-xnat-nginx-1:80/data/projects"):
+    def __init__(self, username="admin", password="admin", base_url="http://digione-infrastructure-xnat-nginx-1:80"):
         self.username = username
         self.password = password
         self.base_url = base_url
+        self.base_url_projects = f"{base_url}/data/projects"
         self.required_data_types = ["xnat:ctScanData", "xnat:rtImageScanData"]
         
     def _get(self, url):
@@ -40,11 +41,11 @@ class XNATlistener:
         
     def get_projects(self):
         """Get the projects in XNAT that contain data and save it in a dict with its corresponding URl"""
-        data = self._get(self.base_url)
+        data = self._get(self.base_url_projects)
         projects = data.get("ResultSet", {}).get("Result", [])
         
         project_urls = {
-            proj["name"]: f"{self.base_url}/{proj['ID']}/subjects"
+            proj["name"]: f"{self.base_url_projects}/{proj['ID']}/subjects"
             for proj in projects
         }
 
@@ -104,7 +105,7 @@ class XNATlistener:
             file_uri = file_entry.get("URI")
 
             # Build download URL
-            download_url = urljoin("http://digione-infrastructure-xnat-nginx-1:80", file_uri)
+            download_url = urljoin(self.base_url, file_uri)
             local_path = os.path.join(output_dir, file_name)
 
             with requests.get(download_url, auth=HTTPBasicAuth(self.username, self.password), stream=True) as r:

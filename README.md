@@ -32,11 +32,10 @@ Responsible for:
 ---
 
 ##  Things to Keep in Mind
+- If it is constantly running and it has checked a subject, it will not check the subject again eventhough you would change it contents
 
 ### XNAT Credentials & URL
-- Default: `admin:admin` at `http://localhost/data/projects`.
-- Change when initializing `XNATlistener`:
-
+- The base url is set for integration into the digione pipeline if you run xnat in a seperate container you need to localhost
 ```python
 listener = XNATlistener(
     username="user",
