@@ -32,7 +32,7 @@ Responsible for:
 ---
 
 ##  Things to Keep in Mind
-- If it is constantly running and it has checked a subject, it will not check the subject again eventhough you would change it contents
+- If it is constantly running and it has checked a subject and has has both ct scans and rtstruct, it will not check the subject again eventhough you would change it contents
 
 ### XNAT Credentials & URL
 - The base url is set for integration into the digione pipeline if you run xnat in a seperate container you need to localhost
