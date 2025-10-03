@@ -17,8 +17,10 @@ class Runner:
     def __init__(self):
         if os.path.exists("/app/data/processed_ids.txt"):
             with open("/app/data/processed_ids.txt") as f:
+                logging.info("Processed_ids.txt file has been found")
                 self.processed_ids = [line.strip() for line in f if line.strip()]
         else:
+            logging.info("No processed_ids.txt file has been found")
             self.processed_ids = []
                 
         self.next_queue = Config("xnat_listener")["send_queue"]
@@ -35,6 +37,7 @@ class Runner:
 
                 with open("/app/data/processed_ids.txt", "w") as f:
                     f.write("\n".join(self.processed_ids))
+                    logging.info("Updated the processed_ids.txt file")
 
         if not downloaded_ids:
             logging.info("Could not find new data")
