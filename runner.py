@@ -50,7 +50,7 @@ class Runner:
     def run_once(self):
         ids = self.Initiate_listener()
         folder_paths = [f"data/{id}" for id in ids]
-        print(folder_paths)
+        logging.info(folder_paths)
         for path in folder_paths:
             if os.path.exists(path):
                 self.send_next_queue(self.next_queue, path)
