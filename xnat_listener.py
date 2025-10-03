@@ -137,7 +137,8 @@ class XNATlistener:
                         data_url = f"{url}/{datatypes['ID']}/resources"
                         data_url = f"{data_url}/{self._get(data_url)['ResultSet']['Result'][0]['label']}/files"
                         self.download_url(data_url, folder)
-                        checked_IDs.append(id)
+                        
+                    checked_IDs.append(id)
 
                 # If there there are folders for the datatypes required but the data itself is missing
                 except Exception as e:
