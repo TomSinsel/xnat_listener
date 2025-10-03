@@ -33,8 +33,8 @@ class Runner:
                 logging.info(f"Found new data with id: {id}")
                 self.processed_ids.append(id)
 
-        with open("/app/data/processed_ids.txt", "w") as f:
-            f.write("\n".join(self.processed_ids))
+                with open("/app/data/processed_ids.txt", "w") as f:
+                    f.write("\n".join(self.processed_ids))
 
         if not downloaded_ids:
             logging.info("Could not find new data")
