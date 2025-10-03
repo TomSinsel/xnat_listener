@@ -15,7 +15,12 @@ logger = logging.getLogger()
 
 class Runner:
     def __init__(self):
-        self.processed_ids = []
+        if os.path.exists("/app/data/processed_ids.txt"):
+            with open("/app/data/processed_ids.txt") as f:
+                self.processed_ids = [line.strip() for line in f if line.strip()]
+        else:
+            self.processed_ids = []
+                
         self.next_queue = Config("xnat_listener")["send_queue"]
     
     def Initiate_listener(self):
@@ -27,7 +32,10 @@ class Runner:
             if id not in self.processed_ids:
                 logging.info(f"Found new data with id: {id}")
                 self.processed_ids.append(id)
-        
+
+        with open("/app/data/processed_ids.txt", "w") as f:
+            f.write("\n".join(self.processed_ids))
+
         if not downloaded_ids:
             logging.info("Could not find new data")
                 
