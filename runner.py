@@ -28,23 +28,20 @@ class Runner:
     def Initiate_listener(self):
         listener = XNATlistener()
         downloaded_ids = listener.run(self.processed_ids)
-
-        new_ids = []
-
+        
         for id in downloaded_ids:
             if id not in self.processed_ids:
                 logging.info(f"Found new data with id: {id}")
                 self.processed_ids.append(id)
-                new_ids.append(id)
 
-        if new_ids:
-            with open("/app/data/processed_ids.txt", "w") as f:
-                f.write("\n".join(self.processed_ids))
-                logging.info("Updated the processed_ids.txt file")
-        else:
+                with open("/app/data/processed_ids.txt", "w") as f:
+                    f.write("\n".join(self.processed_ids))
+                    logging.info("Updated the processed_ids.txt file")
+
+        if not downloaded_ids:
             logging.info("Could not find new data")
-
-        return new_ids 
+                
+        return downloaded_ids
     
     def send_next_queue(self, queue, data_folder):
         message_creator = messenger()
